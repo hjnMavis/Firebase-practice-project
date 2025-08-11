@@ -1,13 +1,23 @@
 import styles from './Home.module.css'
 import { useFirestore } from '../../hooks/useFirestore'
 
-
-
-
 // diaries는 props 로 전달되기 때문에 원래는 props.diaries 로 접근해야 하지만 비구조화할당을 이용하면 깔끔합니다.
 
 export default function DiaryList({ diaries }) {
     const { deleteDocument } = useFirestore('diary');
+    
+    // 날짜 포맷팅 함수
+    const formatDate = (timestamp) => {
+        if (!timestamp) return '';
+        const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+        return date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            weekday: 'long'
+        });
+    };
+
     return (
         <>
             {/* jsx를 바로 반영하기 위해 map을 사용하겠습니다. map은 새로운 배열을 반환하는 순환문입니다.
@@ -17,9 +27,11 @@ export default function DiaryList({ diaries }) {
 
             {diaries.map((item) => {
                 return (
-
                     <li key={item.id}>
-                        <strong className={styles.title}>{item.title}</strong>
+                        <div className={styles.diaryHeader}>
+                            <strong className={styles.title}>{item.title}</strong>
+                            <span className={styles.date}>{formatDate(item.createdAt)}</span>
+                        </div>
                         <p className={styles.text}>{item.text}</p>
                         <button type="button" onClick={() => { deleteDocument(item.id) }}>삭제</button>
                     </li>

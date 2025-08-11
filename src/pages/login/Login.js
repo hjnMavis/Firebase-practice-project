@@ -24,15 +24,15 @@ export default function Login() {
     return (
         <form className={styles.login_form} onSubmit={handleSubmit}>
             <fieldset>
-                <legend>로그인</legend>
-                <label htmlFor="myEmail">email : </label>
-                <input type="email" id="myEmail" required value={email} onChange={handleData} />
+                <legend>🔐 로그인</legend>
+                <label htmlFor="myEmail">📧 이메일</label>
+                <input type="email" id="myEmail" required value={email} onChange={handleData} placeholder="이메일을 입력해주세요" />
             
-                <label htmlFor="myPassword">password : </label>
-                <input type="password" id="myPassword" required value={password} onChange={handleData}/>
+                <label htmlFor="myPassword">🔒 비밀번호</label>
+                <input type="password" id="myPassword" required value={password} onChange={handleData} placeholder="비밀번호를 입력해주세요"/>
             
-                {!isPending && <button type="submit" className={styles.btn}>로그인</button>}
-                {isPending && <strong>로그인 진행중입니다...</strong>}
+                {!isPending && <button type="submit" className={styles.btn}>✨ 로그인하기</button>}
+                {isPending && <strong>로그인 진행중입니다... 💫</strong>}
                 {error && <strong>{error}</strong>}
                 
             </fieldset>

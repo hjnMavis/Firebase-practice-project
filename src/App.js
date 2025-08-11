@@ -20,7 +20,7 @@ function App() {
             <Route path="/signup" element={user ? <Navigate replace={true} to="/" /> : <Signup />} />
           </Routes>
         </BrowserRouter>
-      ) : "Loading..." }
+      ) : <div className="loading">일기장을 준비하고 있어요... ✨</div> }
       
     </div>
   );
